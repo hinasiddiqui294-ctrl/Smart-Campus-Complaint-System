@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Campus Complaint Tracker - submit, track and manage campus complaints.">
+  <title>CampusCare | Smart Complaint Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-icon">C</span><span>CampusCare<small>SMART CAMPUS PORTAL</small></span></a>
+    <div class="nav-caption">MENU</div>
+    <nav>
+      <a class="nav-item active" href="#dashboard"><span>▦</span> Dashboard</a>
+      <a class="nav-item" href="#complaints"><span>▤</span> My Complaints</a>
+      <a class="nav-item" href="#help"><span>ⓘ</span> Help & Support</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="help-card"><div class="help-bubble">✦</div><strong>Need a hand?</strong><p>We're here to help make your campus better.</p><a href="#help">Contact support →</a></div>
+      <div class="user-profile"><div class="avatar">HS</div><div><strong>Hina Siddiqui</strong><small>Student · B.Tech CSE</small></div><button aria-label="Profile options">•••</button></div>
+    </div>
+  </aside>
+
+  <main class="main" id="dashboard">
+    <header class="topbar">
+      <div class="mobile-brand">CampusCare</div>
+      <div class="welcome"><div class="eyebrow">STUDENT PORTAL / OVERVIEW</div><h1>Good morning, Hina <span>✦</span></h1><p>Speak up. We’re listening. Let’s make campus better together.</p></div>
+      <button class="primary-btn" id="newComplaint"><span>＋</span> New complaint</button>
+    </header>
+
+    <section class="stats">
+      <article class="stat-card"><div class="stat-head"><span>Total complaints</span><i class="stat-icon purple">▤</i></div><strong id="totalCount">12</strong><small><b>All time</b> submissions</small></article>
+      <article class="stat-card"><div class="stat-head"><span>In progress</span><i class="stat-icon amber">◷</i></div><strong id="progressCount">04</strong><small>Being worked on</small></article>
+      <article class="stat-card"><div class="stat-head"><span>Resolved</span><i class="stat-icon green">✓</i></div><strong id="resolvedCount">07</strong><small><b class="green-text">Great work!</b> issues fixed</small></article>
+      <article class="stat-card"><div class="stat-head"><span>Pending review</span><i class="stat-icon blue">◉</i></div><strong id="pendingCount">01</strong><small>Awaiting assignment</small></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel priority-panel">
+        <div class="panel-title"><div><h2>Complaint activity</h2><p>A quick look at your submissions.</p></div><span class="live-pill"><i></i> LIVE OVERVIEW</span></div>
+        <div class="activity-layout">
+          <div class="activity-chart"><div class="activity-ring" id="activityRing"><div><strong id="ringTotal">12</strong><small>Total reports</small></div></div></div>
+          <div class="activity-legend">
+            <div><i class="dot purple-dot"></i><span>Resolved</span><b id="legendResolved">07</b></div>
+            <div><i class="dot amber-dot"></i><span>In progress</span><b id="legendProgress">04</b></div>
+            <div><i class="dot blue-dot"></i><span>Pending</span><b id="legendPending">01</b></div>
+          </div>
+        </div>
+      </article>
+      <article class="panel tips-panel">
+        <div class="panel-title"><div><h2>How it works</h2><p>Getting an issue resolved is simple.</p></div></div>
+        <div class="step"><span>01</span><div><b>Submit your complaint</b><small>Tell us what happened and where.</small></div></div>
+        <div class="step"><span>02</span><div><b>We review and assign</b><small>Your issue reaches the right team.</small></div></div>
+        <div class="step"><span>03</span><div><b>Track the progress</b><small>Stay updated until it’s resolved.</small></div></div>
+      </article>
+    </section>
+
+    <section class="panel complaints-panel" id="complaints">
+      <div class="panel-title list-heading"><div><h2>Recent complaints</h2><p>Track the status of the issues you’ve reported.</p></div><button class="outline-btn" id="viewAll">View all ↗</button></div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Search complaints..."></label>
+        <select id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option>Pending</option><option>In Progress</option><option>Resolved</option></select>
+        <select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option><option>Infrastructure</option><option>Cleanliness</option><option>IT & Wi-Fi</option><option>Hostel</option><option>Academic</option><option>Transport</option><option>Other</option></select>
+      </div>
+      <div class="table-scroll"><table><thead><tr><th>COMPLAINT</th><th>CATEGORY</th><th>DATE SUBMITTED</th><th>PRIORITY</th><th>STATUS</th><th></th></tr></thead><tbody id="complaintRows"></tbody></table></div>
+      <div class="empty" id="empty" hidden>No complaints match your search. Try another filter or submit a new complaint.</div>
+    </section>
+    <section class="footer-note" id="help"><span>♥</span> Your voice matters. Together, we build a better campus. <a href="mailto:campuscare@example.com">Contact support</a></section>
+  </main>
+
+  <div class="modal-backdrop" id="modal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><div class="eyebrow">WE’RE LISTENING</div><h2 id="modalTitle">Submit a complaint</h2><p>Share the details and we’ll take it from here.</p></div><button class="close" id="closeModal" aria-label="Close">×</button></div>
+      <form id="complaintForm">
+        <label class="field">Complaint title<input id="title" maxlength="65" placeholder="Briefly describe the issue" required></label>
+        <div class="form-row">
+          <label class="field">Category<select id="category" required><option value="">Select category</option><option>Infrastructure</option><option>Cleanliness</option><option>IT & Wi-Fi</option><option>Hostel</option><option>Academic</option><option>Transport</option><option>Other</option></select></label>
+          <label class="field">Location<input id="location" placeholder="e.g. Block A, Room 204" required></label>
+        </div>
+        <label class="field">Description<textarea id="description" rows="4" maxlength="500" placeholder="Please provide details that will help us resolve the issue..." required></textarea></label>
+        <div class="form-row">
+          <label class="field">Priority<select id="priority"><option>Medium</option><option>Low</option><option>High</option></select></label>
+          <label class="field">Your email<input id="email" type="email" placeholder="name@example.com" required></label>
+        </div>
+        <div class="form-note">ⓘ Your complaint will be saved in this browser for this demo.</div>
+        <button class="primary-btn submit-btn" type="submit">Submit complaint <span>→</span></button>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="toast">Complaint submitted successfully ✓</div>
+  <script src="script.js"></script>
+</body>
+</html>
